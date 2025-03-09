@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Norbit.Crm.Krasnobaev.DynamicArrayUtilities
+namespace Krasnobaev.DynamicArrayUtilities
 {
 	/// <summary>
 	/// Динамический массив.
