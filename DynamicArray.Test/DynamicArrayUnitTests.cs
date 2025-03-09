@@ -1,17 +1,17 @@
-using Norbit.Crm.Krasnobaev.DynamicArrayUtilities;
+using Krasnobaev.DynamicArrayUtilities;
 using System.Linq.Expressions;
 
-namespace Norbit.Crm.krasnobaev.DynamicArray.Test
+namespace Krasnobaev.DynamicArray.Test
 {
     /// <summary>
-    /// Тесты динамического массива.
+    /// РўРµСЃС‚С‹ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РјР°СЃСЃРёРІР°.
     /// </summary>
     [TestClass]
     public class DynamicArrayUnitTests
     {
         #region Indexer Tests
         /// <summary>
-        /// Передача индексатору корректного значения.
+        /// РџРµСЂРµРґР°С‡Р° РёРЅРґРµРєСЃР°С‚РѕСЂСѓ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ.
         /// </summary>
         [TestMethod]
         [DataRow(0, 1)]
@@ -25,7 +25,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Передача индексатору некорректного значения.
+        /// РџРµСЂРµРґР°С‡Р° РёРЅРґРµРєСЃР°С‚РѕСЂСѓ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ.
         /// </summary>
         /// <param name="invalidIndex"></param>
         [TestMethod]
@@ -45,7 +45,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         #region Constructor Tests
 
         /// <summary>
-        /// Конструктор по умолчанию.
+        /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
         /// </summary>
         [TestMethod]
         public void Constructor_DefaultCapacity_IsCorrect()
@@ -57,7 +57,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Передача конструктору корректного значения.
+        /// РџРµСЂРµРґР°С‡Р° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂСѓ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ.
         /// </summary>
         /// <param name="capacity"></param>
         [TestMethod]
@@ -72,9 +72,9 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Конструктор с передачей коллекции.
+        /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїРµСЂРµРґР°С‡РµР№ РєРѕР»Р»РµРєС†РёРё.
         /// </summary>
-        /// <param name="collection">Вставляемая в массив коллекция.</param>
+        /// <param name="collection">Р’СЃС‚Р°РІР»СЏРµРјР°СЏ РІ РјР°СЃСЃРёРІ РєРѕР»Р»РµРєС†РёСЏ.</param>
         [TestMethod]
         [DataRow(new int[] { 1, 4, 6, -33, 44, 1000 })]
         [DataRow(new int[] { 100002, 3233, 123, 334, 404, 602 })]
@@ -89,7 +89,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Передача конструктору некорректного значения.
+        /// РџРµСЂРµРґР°С‡Р° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂСѓ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ.
         /// </summary>
         /// <param name="invalidCapacity"></param>
         [TestMethod]
@@ -102,7 +102,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Передача пустой коллекции.
+        /// РџРµСЂРµРґР°С‡Р° РїСѓСЃС‚РѕР№ РєРѕР»Р»РµРєС†РёРё.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -117,9 +117,9 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         #region Add and AddRange Tests
 
         /// <summary>
-        /// Добавление элемента.
+        /// Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°.
         /// </summary>
-        /// <param name="element">Передаваемый элемент.</param>
+        /// <param name="element">РџРµСЂРµРґР°РІР°РµРјС‹Р№ СЌР»РµРјРµРЅС‚.</param>
         [TestMethod]
         [DataRow(10)]
         [DataRow(-100)]
@@ -135,7 +135,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Добавление валидной коллекции в конец массива.
+        /// Р”РѕР±Р°РІР»РµРЅРёРµ РІР°Р»РёРґРЅРѕР№ РєРѕР»Р»РµРєС†РёРё РІ РєРѕРЅРµС† РјР°СЃСЃРёРІР°.
         /// </summary>
         [TestMethod()]
         [DataRow(new int[] { 0, 16, 20, 1034123, 1312313123 })]
@@ -151,7 +151,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Добавление невалидного содержимого в конец массива.
+        /// Р”РѕР±Р°РІР»РµРЅРёРµ РЅРµРІР°Р»РёРґРЅРѕРіРѕ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РІ РєРѕРЅРµС† РјР°СЃСЃРёРІР°.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -167,10 +167,10 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         #region Remove Tests
 
         /// <summary>
-        /// Удаление элемента.
+        /// РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°.
         /// </summary>
-        /// <param name="collection">Добавляемая коллекция.</param>
-        /// <param name="element">Удаляемый элемент.</param>
+        /// <param name="collection">Р”РѕР±Р°РІР»СЏРµРјР°СЏ РєРѕР»Р»РµРєС†РёСЏ.</param>
+        /// <param name="element">РЈРґР°Р»СЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚.</param>
         [TestMethod]
         [DataRow(new int[] { 2, 4 }, 4)]
         [DataRow(new int[] { 4, 3, 9 }, 3)]
@@ -188,7 +188,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Удаление несуществующего элемента.
+        /// РЈРґР°Р»РµРЅРёРµ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°.
         /// </summary>
         [TestMethod]
         public void Remove_NonExistingElement_ReturnsFalse()
@@ -203,10 +203,10 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         #region Insert Tests
 
         /// <summary>
-        /// Вставка элемента по индексу.
+        /// Р’СЃС‚Р°РІРєР° СЌР»РµРјРµРЅС‚Р° РїРѕ РёРЅРґРµРєСЃСѓ.
         /// </summary>
-        /// <param name="index">Индекс вставки.</param>
-        /// <param name="element">Элемент для вставки.</param>
+        /// <param name="index">РРЅРґРµРєСЃ РІСЃС‚Р°РІРєРё.</param>
+        /// <param name="element">Р­Р»РµРјРµРЅС‚ РґР»СЏ РІСЃС‚Р°РІРєРё.</param>
         [TestMethod]
         [DataRow(2, 100)]
         [DataRow(0, -50)]
@@ -220,9 +220,9 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Вставка в некорректный индекс.
+        /// Р’СЃС‚Р°РІРєР° РІ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РёРЅРґРµРєСЃ.
         /// </summary>
-        /// <param name="invalidIndex">Индекс вставки.</param>
+        /// <param name="invalidIndex">РРЅРґРµРєСЃ РІСЃС‚Р°РІРєРё.</param>
         [TestMethod]
         [DataRow(-1)]
         [DataRow(4)]
@@ -238,7 +238,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         #region Enumerator Tests
 
         /// <summary>
-        /// Проверка перечислителя.
+        /// РџСЂРѕРІРµСЂРєР° РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ.
         /// </summary>
         [TestMethod]
         [DataRow(new int[] { 1, 2, 3 })]
@@ -255,7 +255,7 @@ namespace Norbit.Crm.krasnobaev.DynamicArray.Test
         }
 
         /// <summary>
-        /// Проверка перечислителя в пустой коллекции.
+        /// РџСЂРѕРІРµСЂРєР° РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ РІ РїСѓСЃС‚РѕР№ РєРѕР»Р»РµРєС†РёРё.
         /// </summary>
         [TestMethod]
         [DataRow(new int[] { })]
