@@ -1,14 +1,17 @@
-﻿using System.Collections;
+﻿using Krasnobaev.DynamicArrayUtilities.Interfaces;
+using System.Collections;
 
 namespace Krasnobaev.DynamicArrayUtilities
 {
-	/// <summary>
-	/// Динамический массив.
-	/// </summary>
-	/// <typeparam name="T">Тип элементов массива.</typeparam>
-	public class DynamicArray<T> : IEnumerable<T>
+    /// <summary>
+    /// Динамический массив.
+    /// </summary>
+    /// <typeparam name="T">Тип элементов массива.</typeparam>
+    public class DynamicArray<T> : IEnumerable<T>
 	{
-		private T[] _items;
+		private bool _isModified;
+		private readonly IRepository<T>? _repository;
+		private T[] _items = null!;
 		private int _length;
 		private int _capacity;
 
@@ -67,7 +70,8 @@ namespace Krasnobaev.DynamicArrayUtilities
 		/// </summary>
 		public DynamicArray()
 			: this(DefaultCapacity) 
-		{ 
+		{
+			_isModified = false;
 		}
 
 		/// <summary>
@@ -85,7 +89,9 @@ namespace Krasnobaev.DynamicArrayUtilities
 			_items = new T[capacity];
 			_capacity = capacity;
 			_length = 0;
+			_isModified = false;
 		}
+
 
 		/// <summary>
 		/// Создает динамический массив из <paramref name="collection"/>.
@@ -94,13 +100,41 @@ namespace Krasnobaev.DynamicArrayUtilities
 		public DynamicArray(IEnumerable<T> collection)
 		{
 			ArgumentNullException.ThrowIfNull(collection);
-
 			AddRange(collection);
+			_isModified = false;
+		}
+
+		/// <summary>
+		/// Создает динамический массив и инициализирует его данными из репозитория.
+		/// </summary>
+		/// <param name="repository">Репозиторий, из которого загружаются элементы.</param>
+		/// <exception cref="ArgumentNullException">Выбрасывается, если переданный репозиторий равен <c>null</c>.</exception>
+		public DynamicArray(IRepository<T> repository)
+		{
+			_repository = repository ?? throw new ArgumentNullException(nameof(repository));
+			var collection = _repository.GetAll().ToArray();
+			_items = new T[collection.Length];
+			collection.CopyTo(_items, 0);
+			_length = collection.Length;
+			_capacity = _length;
+			_isModified = false;
 		}
 
 		#endregion
 
 		#region Methods
+
+		/// <summary>
+		/// Сохраняет текущие элементы массива, используя репозиторий.
+		/// </summary>
+		public void Save()
+		{
+			if (_isModified && _repository != null)
+			{
+				_repository.Save(_items.Take(_length));
+				_isModified = false;
+			}
+		}
 
 		/// <summary>
 		/// Добавление элемента в конец массива.
@@ -110,6 +144,7 @@ namespace Krasnobaev.DynamicArrayUtilities
 		{
 			EnsureCapacity(_length + 1);
 			_items[_length++] = item;
+			_isModified = true;
 		}
 
 		/// <summary>
@@ -129,6 +164,7 @@ namespace Krasnobaev.DynamicArrayUtilities
 			EnsureCapacity(_length + count);
 			tempList.CopyTo(_items, _length);
 			_length += count;
+			_isModified = true;
 		}
 
 		/// <summary>
@@ -147,6 +183,7 @@ namespace Krasnobaev.DynamicArrayUtilities
 
 			Array.Copy(_items, index + 1, _items, index, _length - index - 1);
 			_items[--_length] = default!;
+			_isModified = true;
 
 			return true;
 		}
@@ -166,6 +203,7 @@ namespace Krasnobaev.DynamicArrayUtilities
 			Array.Copy(_items, index, _items, index + 1, _length - index);
 			_items[index] = item;
 			_length++;
+			_isModified = true;
 
 			return true;
 		}
@@ -187,6 +225,7 @@ namespace Krasnobaev.DynamicArrayUtilities
 			{
 				ValidateIndex(index);
 				_items[index] = value;
+				_isModified = true;
 			}
 		}
 

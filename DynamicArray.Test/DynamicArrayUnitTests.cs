@@ -270,8 +270,7 @@ namespace Krasnobaev.DynamicArray.Test
             }
             CollectionAssert.AreEqual(values.ToList(), list);
         }
-
+		
         #endregion
-    }
-
+	}
 }
